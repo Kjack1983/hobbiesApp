@@ -1,0 +1,8 @@
+/**
+* Menu links.
+*/
+a.nav-link {
+    &.active {
+        background: #ddd;
+    }
+}
