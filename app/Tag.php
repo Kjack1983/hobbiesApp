@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hobby extends Model
+class Tag extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,6 +13,6 @@ class Hobby extends Model
      */
     protected $fillable = array(
         'name',
-        'description'
+        'style'
     );
 }
