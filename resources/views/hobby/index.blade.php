@@ -11,7 +11,17 @@
                    <ul class="list-group">
                        @foreach($hobbies as $hobby)
                         <li class="list-group-item">
-                            <a title="Show details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a> : {{ $hobby->description }} 
+                            <a title="Show details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a> : {{ $hobby->description }}
+                            {{-- DELETE function --}}
+                            <form class="float-right" style="display:inline" action="/hobby/{{ $hobby->id }}" method="post">
+                                @csrf
+                                @method("DELETE")
+                                <input type="submit" class="btn btn-sm btn-outline-danger" value="Delete">
+                            </form>
+                            <a href="/hobby/{{ $hobby->id }}/edit" class="btn btn-sm btn-light ml-2 float-right">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </a>
                         </li>
                        @endforeach
                    </ul>

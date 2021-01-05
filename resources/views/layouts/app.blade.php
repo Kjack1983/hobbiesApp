@@ -40,6 +40,7 @@
                         <li><a href="/info" class="nav-link {{ Request::is('info') ? 'active' : ''}}">Info</a></li>
                         {{-- Everything that start with hobby will highlighted in the future with the start sign * --}}
                         <li><a href="/hobby" class="nav-link {{ Request::is('hobby*') ? 'active' : ''}}">Hobbies</a></li>
+                        <li><a href="/tag" class="nav-link {{ Request::is('tag*') ? 'active' : ''}}">Tags</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
