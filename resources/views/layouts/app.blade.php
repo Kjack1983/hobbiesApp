@@ -79,10 +79,30 @@
         </nav>
 
         <main class="py-4">
+            @isset($message_success)
+                <div class="container">
+                    <div class="alert alert-success" role="alert">
+                        <ul class="mb-0">
+                            <li>{!! $message_success !!}</li>
+                        </ul>
+                    </div>
+                </div>
+            @endisset
+
+            @isset($message_warning)
+                <div class="container">
+                    <div class="alert alert-warning" role="alert">
+                        <ul class="mb-0">
+                            <li>{!! $message_warning !!}</li>
+                        </ul>
+                    </div>
+                </div>
+            @endisset
+            
             {{-- Validate fields loop through errors array and display. --}}
             @if($errors->any())
                 <div class="container">
-                    <div class="alert alert-danger" role="danger">
+                    <div class="alert alert-danger" role="alert">
                         <ul class="mb-0">
                             @foreach ($errors->all() as $error)
                                 <li>{!! $error !!}</li>

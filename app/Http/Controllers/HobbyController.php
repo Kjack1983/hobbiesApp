@@ -51,7 +51,11 @@ class HobbyController extends Controller
         ));
 
         $hobby->save();
-        return $this->index();
+
+        return $this->index()->with(array(
+            'message_success' => 'The hobby <b>' .$hobby->name .'</b> was created successfully',
+            'message_warrning' => 'Warning for <b>' .$hobby->name .'</b>'
+        ));
     }
 
     /**
@@ -62,7 +66,9 @@ class HobbyController extends Controller
      */
     public function show(Hobby $hobby)
     {
-        //
+        return view('hobby.show')->with(array(
+            'hobby' => $hobby
+        ));
     }
 
     /**
