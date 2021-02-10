@@ -94,8 +94,8 @@ class TagController extends Controller
     {
         // validation
         $request->validate(array(
-            'name' => 'required|min:3',
-            'style' => 'required|min:5'
+            'name' => 'required',
+            'style' => 'required'
         ));
         
         $tag->update(array(

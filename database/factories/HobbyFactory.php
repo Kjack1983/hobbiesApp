@@ -6,7 +6,8 @@ use App\Hobby;
 use Faker\Generator as Faker;
 
 $factory->define(Hobby::class, function (Faker $faker) {
-    return [
-        //
-    ];
+    return array(
+        'name' => $faker->realText(30),
+        'description' => $faker->realText()
+    );
 });
