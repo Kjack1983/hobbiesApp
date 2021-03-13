@@ -14,7 +14,7 @@
                    </ul>
                 </div>
                 <div class="mt-2 ml-3 mb-2 d-flex">
-                    <a href="/hobby" class="btn btn-primary btn-sm">
+                    <a href="{{ URL::previous() }}" class="btn btn-primary btn-sm">
                         <i class="fas fa-arrow-circle-up"></i>
                         Back to overview
                     </a>

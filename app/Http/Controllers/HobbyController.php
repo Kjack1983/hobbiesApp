@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Hobby;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class HobbyController extends Controller
 {
+
+    public function __construct() {
+
+        // Restrict the display if the user is not logged in only to index and show views.
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,11 @@ class HobbyController extends Controller
      */
     public function index()
     {
-        $hobbies = Hobby::all();
+        //$hobbies = Hobby::all();
+        
+        //$hobbies = Hobby::paginate(10);
+        $hobbies = Hobby::orderBy('created_at', 'DESC')->paginate(10);
+
         return view('hobby.index')->with([
             'hobbies' => $hobbies
         ]);
@@ -46,7 +58,8 @@ class HobbyController extends Controller
         
         $hobby = new Hobby(array(
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'user_id' =>  auth()->id()
         ));
 
         $hobby->save();

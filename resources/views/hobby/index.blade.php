@@ -12,26 +12,41 @@
                        @foreach($hobbies as $hobby)
                         <li class="list-group-item">
                             <a title="Show details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a> : {{ $hobby->description }}
-                            {{-- DELETE function --}}
+                            
+                            @auth
+                            <a href="/hobby/{{ $hobby->id }}/edit" class="btn btn-sm btn-light ml-2 float-right">
+                                <i class="fas fa-edit"></i>
+                                Edit
+                            </a>
+                            @endauth
+
+                            <span class="mx-2">Posted by:{{ $hobby->user->name }}</span>
+
+                            @auth
                             <form class="float-right" style="display:inline" action="/hobby/{{ $hobby->id }}" method="post">
                                 @csrf
                                 @method("DELETE")
                                 <input type="submit" class="btn btn-sm btn-outline-danger" value="Delete">
                             </form>
-                            <a href="/hobby/{{ $hobby->id }}/edit" class="btn btn-sm btn-light ml-2 float-right">
-                                <i class="fas fa-edit"></i>
-                                Edit
-                            </a>
+                            @endauth
+                            <span class="float-right mx-2">{{ $hobby->created_at->diffForHumans() }}</span>
                         </li>
                        @endforeach
                    </ul>
                 </div>
+
+                <div class="mt-3">
+                    {{ $hobbies->links() }}
+                </div>
+
+                @auth
                 <div class="mt-2 ml-3 mb-2">
                     <a href="/hobby/create " class="btn btn-success btn-sm">
                         <i class="fas fa-plus-circle"></i>
                         Create new hobby
                     </a>
                 </div>
+                @endauth
             </div>
         </div>
     </div>
