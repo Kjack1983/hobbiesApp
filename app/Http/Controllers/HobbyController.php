@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Hobby;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session; 
 
 class HobbyController extends Controller
 {
@@ -64,10 +66,14 @@ class HobbyController extends Controller
 
         $hobby->save();
 
-        return $this->index()->with(array(
+        /* return $this->index()->with(array(
             'message_success' => 'The hobby <b>' .$hobby->name .'</b> was created successfully',
             'message_warrning' => 'Warning for <b>' .$hobby->name .'</b>'
-        ));
+        )); */
+
+        return redirect('/hobby/' . $hobby->id)->with(array(
+            'message_warning' => 'Please assign some tags now.'
+        ));;
     }
 
     /**
@@ -78,8 +84,16 @@ class HobbyController extends Controller
      */
     public function show(Hobby $hobby)
     {
+        $allTags = Tag::all();
+        $usedTags = $hobby->tags;
+        $availableTags = $allTags->diff($usedTags);
+
         return view('hobby.show')->with(array(
-            'hobby' => $hobby
+            'hobby' => $hobby,
+            'availableTags' => $availableTags,
+            // Use flash session created with return back()->with([ on our hobbyTagController.
+            'message_success' => Session::get('message_success'),
+            'message_warning' => Session::get('message_warning')
         ));
     }
 

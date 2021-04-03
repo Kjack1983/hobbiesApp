@@ -15519,3 +15519,7 @@ a.text-dark:focus {
   }
 }
 
+.card-header span.float-right a {
+  color: #fff;
+}
+

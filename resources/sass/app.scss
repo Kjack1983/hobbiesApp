@@ -13,4 +13,12 @@
 // Font-Awesome
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-
+.card-header {
+    span {
+      &.float-right {
+        a {
+            color:#fff;
+        }
+      } 
+    }
+}

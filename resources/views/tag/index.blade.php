@@ -12,12 +12,14 @@
                             @foreach($tags as $tag)
                                 <li class="list-group-item">
                                     <span style="font-size: 130%;" class="mr-2 badge badge-{{ $tag->style }}">{{ $tag->name }}</span>
-                                        <form class="float-right" style="display: inline;" action="/tag/{{ $tag->id }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input class="btn btn-outline-danger btn-sm ml-2" type="submit" value="Delete">
-                                        </form>
-                                        <a class="ml-2 btn btn-sm btn-outline-primary float-right" href="/tag/{{ $tag->id }}/edit"><i class="fas fa-edit"></i> Edit</a>
+
+                                    <a class="ml-2 btn btn-sm btn-outline-primary" href="/tag/{{ $tag->id }}/edit"><i class="fas fa-edit"></i> Edit</a>
+                                    <form class="" style="display: inline;" action="/tag/{{ $tag->id }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input class="btn btn-outline-danger btn-sm ml-2" type="submit" value="Delete">
+                                    </form>
+                                    <a href="/hobby/tag/{{ $tag->id }}" class="float-right">Used {{ $tag->hobbies->count() }} times</a>
                                 </li>
                             @endforeach
                         </ul>

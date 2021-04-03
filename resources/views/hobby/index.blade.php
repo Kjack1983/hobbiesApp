@@ -5,8 +5,19 @@
     <div class="row justify-content-center">
         <div class="col-md-11">
             <div class="card">
-                <div class="card-header">All the hobbies</div>
-
+                @isset($filter)
+                    <div class="card-header">Filtered hobbies: 
+                        <span style="font-size: 130%" class="badge badge-{{ $filter->style }}">
+                            {{ $filter->name }}
+                        </span>
+                        btn btn-info btn-sm
+                        <span class="btn btn-info float-right">
+                            <a href="/hobby">Show all Hobbies</a>
+                        </span>
+                    </div>
+                @else
+                    <div class="card-header">All the hobbies</div>
+                @endisset
                 <div class="card-body">
                    <ul class="list-group">
                        @foreach($hobbies as $hobby)
@@ -20,7 +31,12 @@
                             </a>
                             @endauth
 
-                            <span class="mx-2">Posted by:{{ $hobby->user->name }}</span>
+                            <span class="mx-2">Posted by:
+                                <a href="/user/{{ $hobby->user->id }}">
+                                    {{ $hobby->user->name }} 
+                                </a>
+                                ({{ $hobby->user->hobbies->count() }} hobbies)
+                            </span>
 
                             @auth
                             <form class="float-right" style="display:inline" action="/hobby/{{ $hobby->id }}" method="post">
@@ -30,6 +46,14 @@
                             </form>
                             @endauth
                             <span class="float-right mx-2">{{ $hobby->created_at->diffForHumans() }}</span>
+                            <br>
+                            @foreach($hobby->tags as $tag)
+                                <a href="/hobby/tag/{{ $tag->id }}">
+                                    <span class="badge badge-{{ $tag->style }}">
+                                        {{ $tag->name }}
+                                    </span>
+                                </a>
+                            @endforeach
                         </li>
                        @endforeach
                    </ul>
